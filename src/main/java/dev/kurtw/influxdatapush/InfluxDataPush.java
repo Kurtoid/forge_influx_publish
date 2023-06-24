@@ -30,7 +30,6 @@ public class InfluxDataPush
 
     // keep a reference to the server
     private MinecraftServer server = null;
-    private Thread pushThread = null;
 
     public InfluxDataPush()
     {
@@ -86,8 +85,7 @@ public class InfluxDataPush
             return;
         }
 
-        // TODO: configurable
-        if (server.getTickCount() - lastPublished < 100) {
+        if (server.getTickCount() - lastPublished < InfluxPushConfig.update_ticks.get()) {
             return;
         }
 
@@ -101,7 +99,6 @@ public class InfluxDataPush
         tickTimes /= server.tickTimes.length;
         // convert to milliseconds
         tickTimes /= 1000000;
-        int elapsedTicks = server.getTickCount() - lastPublished;
         p.mspt = tickTimes;
         p.tps = Math.min(1000 / tickTimes, 20);
         int loadedChunks = 0;

@@ -12,6 +12,7 @@ class InfluxPushConfig {
     public static final ForgeConfigSpec.ConfigValue<String> org;
     public static final ForgeConfigSpec.ConfigValue<String> bucket;
     public static final ForgeConfigSpec.ConfigValue<String> location;
+    public static final ForgeConfigSpec.ConfigValue<Integer> update_ticks;
 
     static {
         BUILDER.push("influxkeys");
@@ -24,6 +25,9 @@ class InfluxPushConfig {
         bucket = BUILDER.comment("Influx bucket").define("bucket", "minecraft");
 
         location = BUILDER.comment("Location of the server").define("location", "server");
+
+        BUILDER.comment("Don't pick something too big, or you'll experience FUN");
+        update_ticks = BUILDER.comment("How often to update the data in ticks").define("update_ticks", 100);
 
         BUILDER.pop();
         SPEC = BUILDER.build();
