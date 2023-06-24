@@ -17,7 +17,7 @@ class InfluxPushConfig {
         BUILDER.push("influxkeys");
 
         serverAddress = BUILDER.comment("The address of the InfluxDB server to push data to")
-                .define("serverAddress", "http://192.168.4.4:8086");
+                .define("serverAddress", "http://INFLUX:port");
         token = BUILDER.comment("Influx token").define("token",
                 "");
         org = BUILDER.comment("Influx organization").define("org", "kurtsnetwork");
